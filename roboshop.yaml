@@ -1,7 +1,7 @@
 - name: creating ec2 user
   connection: local
   hosts: local
-  become: yes
+  #become: yes
   vars:
     instances: [ "mongodb", "redis", "mysql", "rabbitmq" ]
     action: create
@@ -18,5 +18,4 @@
       - roboshop-common
       - "roboshop-{{ item }}"
     loop: "{{ instances }}"
-  
-  ####
+    when: action == "create"
