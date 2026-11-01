@@ -2,11 +2,23 @@
   hosts: mongodb
   become: yes
   tasks: 
-   - name: copy mongo repo
-     copy:
-      src: mongo.repo
-      dest: /etc/yum.repos.d/mongo.repo
+    - name: copy mongo repo
+      copy:
+        src: mongo.repo
+        dest: /etc/yum.repos.d/mongo.repo
 
-   - name:
-     debug:
-      msg: "{{ app_name }}"    
+    - name: Installing mongodb
+      package:
+        name: mongodb-org
+        state: present
+
+    - name: Starting mongodb service
+      service:
+        name: mongodb-org
+        state: started
+        
+          
+
+  #  - name:
+  #    debug:
+  #     msg: "{{ app_name }}"    
