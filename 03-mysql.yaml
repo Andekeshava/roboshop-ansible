@@ -1,0 +1,20 @@
+- name: Configuring mysql server
+  hosts: mysql
+  become: yes
+  tasks:
+  - name: Enabling mysql server
+    command: dnf module enable mysql:8.4 -y
+
+  - name: Installing mysql
+    package:
+      name: mysql-server
+      state: present
+
+  - name: Enabling and Restarting
+    service:
+      name: mysqld
+      state: started
+      enabled: yes      
+
+  - name: Setting up root password
+    command: mysql_secure_installation --set-root-pass "{{ mysql_root_password }}"    
