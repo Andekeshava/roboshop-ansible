@@ -13,8 +13,8 @@
   - name: allowing remote connections
     lineinfile:
       path: /etc/redis/redis.conf
-      regexp: 127.0.0.0
-      line: 0.0.0.0
+      regexp: 'bind ^127.0.0.0'
+      line: 'bind 0.0.0.0'
 
   - name: disable protected mode
     lineinfile:
