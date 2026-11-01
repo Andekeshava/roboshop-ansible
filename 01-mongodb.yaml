@@ -14,7 +14,7 @@
 
     - name: Starting mongodb service
       service:
-        name: mongodb-org
+        name: mongod
         state: started
 
     - name: Allowing remote connections
