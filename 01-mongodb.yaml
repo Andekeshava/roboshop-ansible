@@ -26,8 +26,7 @@
     - name: Restarting mongodb
       service:
         name: mongod
-        state: restarted
-            
+        state: restarted    
 
 
   #  - name:
