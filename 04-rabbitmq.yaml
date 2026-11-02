@@ -1,5 +1,5 @@
 - name: configure rabbitMQ server
-  hosts: rabbitMQ
+  hosts: rabbitmq
   become: yes
   tasks: 
   - name: Installing rabbitMQ
