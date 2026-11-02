@@ -79,7 +79,7 @@
     when: product_count.stdout | int == 0
 
   - name: daemon reload
-    systemd_daemon:
+    systemd_service:
       daemon_reload: true 
 
   - name: start and enable 
