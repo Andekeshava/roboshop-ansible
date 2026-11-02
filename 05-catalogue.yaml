@@ -41,6 +41,7 @@
     get_url:
       url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip
       path: /tmp/catalogue.zip
+      dest: /app
 
   - name:  unarchive the code into /app
     unarchive:
