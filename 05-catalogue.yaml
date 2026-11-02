@@ -77,7 +77,7 @@
 
   - name: Load data    
     command: mongosh --host "{{ mongodb_host }}" </app/db/master-data.js
-    when: product_count.stdout | int == 0
+    when: " product_count.stdout | int == 0 "
 
   - name: daemon reload
     systemd_service:
