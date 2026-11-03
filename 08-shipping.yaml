@@ -50,9 +50,9 @@
       chdir: /app  
     register: mvn_default
 
-  - name: print mvn verion without JAVA_HOME
+  - name: print mvn version without JAVA_HOME
     debug:
-      msg: "{{ mvn_default.stdout.lines }}"    
+      msg: "{{ mvn_default.stdout_lines }}"    
 
   - name: Build shipping dependencies
     command: mvn clean package
