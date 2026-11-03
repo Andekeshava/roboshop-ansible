@@ -14,13 +14,14 @@
       name: roboshop
       create_home: false
       home: /app
+      system: true
       shell: /sbin/nologin
       comment: "roboshop system user"
 
   - name: remove existing app directory
     file:
       path: /app
-      state: absent    
+      state: absent
 
   - name: remove existing payment.zip
     file:
@@ -41,7 +42,7 @@
     unarchive:
       src: /tmp/payment.zip
       dest: /app
-      remove_src: yes
+      remote_src: yes
 
   - name: Install dependencies in virtual environment
     pip:
