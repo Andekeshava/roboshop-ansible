@@ -19,7 +19,7 @@
 
   - name: remove existing app directory
     file:
-      src: /tmp/payment.zip
+      path: /tmp/payment.zip
       state: absent
 
   - name: downloading code
