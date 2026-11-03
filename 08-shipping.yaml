@@ -1,0 +1,75 @@
+- name: configure shipping service
+  hosts: shipping
+  become: yes
+  tasks:
+  - name: Enable maven
+    command: dnf module enable maven:3.9 -y
+  
+  - name: Installing maven
+    dnf:
+      name:
+      - maven
+      - java-25-openjdk-devel
+      - maven-openjdk25
+      - mysql
+      state: present
+
+  - name: Create roboshop system user
+    user:
+      name: roboshop
+      create_home: false
+      home: /app
+      system: true
+      shell: /sbin/nologin
+      comment: "roboshop system user"   
+
+  - name: remove existing app directory
+    file:
+      path: /tmp/shipping.zip
+      state: absent
+
+  - name: downloading the shipping source code
+    get_url:
+      url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/shipping-{{ app_version }}.zip
+      dest: /tmp/shipping.zip
+
+  - name: unarchive the zip file
+    ansible.builtin.unarchive:
+      src: /tmp/shipping.zip
+      dest: /app
+      remote_src: yes     
+
+  - name: installing dependencies
+    command: mvn clean package
+    args:
+      chdir: /app
+
+
+  - name: Move target folder to shipping folder
+    command: mv target/shipping.jar  shipping.jar
+    args:
+      chdir: /app
+
+  - name: Loading cities data
+    shell: mysql -h {{ mysql_host }} -uroot -pRoboShop@1 < /app/db/master-data.sql    
+
+  - name: create app user
+    shell: mysql -h {{ mysql_host }} -uroot -p{{ mysql_root_password}} < /app/db/app-user.sql  
+
+  - name: copying and Configuring systemd service 
+    template:
+      src: shipping.service.j2
+      dest: /etc/systemd/system/shipping.service
+
+  - name: demon reload
+    systemd_service: 
+      daemon_reload: true
+
+  - name: enable and restart
+    service:
+      name: shipping
+      state: restarted
+      enabled: yes         
+
+
+    

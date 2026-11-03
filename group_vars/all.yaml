@@ -9,3 +9,4 @@ shipping_host: shipping.jkrdigital.store
 mysql_host: mysql.jkrdigital.store
 payment_host: payment.jkrdigital.store
 rabbitmq_host: rabbitmq.jkrdigital.store
+mysql_root_password: RoboShop@1
