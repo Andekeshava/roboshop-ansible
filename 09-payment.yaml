@@ -19,6 +19,11 @@
 
   - name: remove existing app directory
     file:
+      path: /app
+      state: absent    
+
+  - name: remove existing payment.zip
+    file:
       path: /tmp/payment.zip
       state: absent
 
