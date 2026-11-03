@@ -28,7 +28,7 @@
       dest: /app
 
   - name: unarchive the zip file
-    template:
+    unarchivearchive:
       src: /tmp/payment.zip
       dest: /app
       remove_src: yes
