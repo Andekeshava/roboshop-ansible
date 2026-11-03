@@ -52,7 +52,7 @@
 
   - name: print mvn verion without JAVA_HOME
     debug:
-      msg: "{{ mvn_default_stdout.lines }}"    
+      msg: "{{ mvn_default.stdout.lines }}"    
 
   - name: Build shipping dependencies
     command: mvn clean package
