@@ -30,11 +30,11 @@
 
   - name: downloading the shipping source code
     get_url:
-      url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/shipping-{{ app_version }}.zip
+      url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/shipping-{{app_version}}.zip
       dest: /tmp/shipping.zip
 
   - name: unarchive the zip file
-    ansible.builtin.unarchive:
+    unarchive:
       src: /tmp/shipping.zip
       dest: /app
       remote_src: yes     
