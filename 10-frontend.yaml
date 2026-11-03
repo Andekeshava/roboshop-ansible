@@ -24,7 +24,7 @@
   - name: downloading the frontend application
     get_url:
       url: https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/frontend-v4.zip
-      path: /tmp/frontend.zip
+      dest: /tmp/frontend.zip
 
   - name: Unzip the frontend application
     unarchive:
