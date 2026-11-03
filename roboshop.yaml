@@ -47,7 +47,7 @@
       value: "{{ item.instances[0].public_ip_address }}"
       overwrite: true
     loop: "{{ ec2_output.results }}"
-    when: action == "create"  and item.item = "frontend"
+    when: action == "create"  and item.item == "frontend"
 
   - name: Delete Route53 record
     amazon.aws.route53:
@@ -67,7 +67,7 @@
       type: A
       ttl: 1
     loop: "{{ ec2_output.results }}"
-    when: action == "delete" and item.item = "frontend"
+    when: action == "delete" and item.item == "frontend"
 
   - name: Delete Ec2 instance
     amazon.aws.ec2_instance:
